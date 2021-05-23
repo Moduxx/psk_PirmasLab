@@ -1,6 +1,10 @@
 package com.usercommunity.pirmasAntrasLab.model;
 
+import jdk.jfr.DataAmount;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Community")
@@ -8,13 +12,16 @@ public class Community {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     @Column(name = "Name")
     private String Name;
 
     @Column(name = "URL")
     private String URL;
+
+    @OneToMany(mappedBy = "community")
+    private List<User> users = new ArrayList<>();
 
     public String getURL() {
         return URL;
@@ -32,11 +39,11 @@ public class Community {
         Name = name;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 }
